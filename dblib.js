@@ -28,7 +28,7 @@ const getTotalRecords = () => {
 module.exports.getTotalRecords = getTotalRecords;
 
 const insertCustomer = (customer) => {
-    // Will accept either a product array or product object
+    // Will accept either a customer array or customer object
     if (customer instanceof Array) {
         params = customer;
     } else {
@@ -55,3 +55,67 @@ const insertCustomer = (customer) => {
 
 // Add this at the bottom
 module.exports.insertCustomer = insertCustomer;
+
+const findCustomers = (customer) => {
+    // Will build query based on data provided from the form
+    //  Use parameters to avoid sql injection
+
+    // Declare variables
+    var i = 1;
+    params = [];
+    sql = "SELECT * FROM customer WHERE true";
+
+    // Check data provided and build query as necessary
+    if (customer.cusId !== "") {
+        params.push(parseInt(customer.cusId));
+        sql += ` AND cusId = $${i}`;
+        i++;
+    };
+    if (customer.cusFname !== "") {
+        params.push(`${customer.cusFname}%`);
+        sql += ` AND UPPER(cusFname) LIKE UPPER($${i})`;
+        i++;
+    };
+    if (customer.cusLname !== "") {
+        params.push(`${customer.cusLname}%`);
+        sql += ` AND UPPER(cusLname) LIKE UPPER($${i})`;
+        i++;
+    };
+    if (customer.cusState !== "") {
+        params.push(`${customer.cusState}%`);
+        sql += ` AND UPPER(cusState) LIKE UPPER($${i})`;
+        i++;
+    };
+    if (customer.cusSalesYTD !== "") {
+        params.push(parseFloat(customer.cusSalesYTD ));
+        sql += ` AND cusSalesYTD >= $${i}`;
+        i++;
+    };
+    if (customer.cusSalesPrev !== "") {
+        params.push(parseFloat(customer.cusSalesPrev ));
+        sql += ` AND cusSalesPrev >= $${i}`;
+        i++;
+    };
+
+    sql += ` ORDER BY cusId`;
+    // for debugging
+     console.log("sql: " + sql);
+     console.log("params: " + params);
+
+    return pool.query(sql, params)
+        .then(result => {
+            return { 
+                trans: "success",
+                result: result.rows
+            }
+        })
+        .catch(err => {
+            return {
+                trans: "Error",
+                result: `Error: ${err.message}`
+            }
+        });
+};
+
+// Add towards the bottom of the page
+module.exports.findCustomers = findCustomers;
