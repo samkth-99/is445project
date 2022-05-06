@@ -49,7 +49,7 @@ dblib.getTotalRecords()
     });
 
 
-    app.get("/manage", async (req, res) => {
+app.get("/manage", async (req, res) => {
         // Omitted validation check
         const totRecs = await dblib.getTotalRecords();
         res.render("manage", {
@@ -58,7 +58,7 @@ dblib.getTotalRecords()
         });
     });
     
-    app.post("/manage", async (req, res) => {
+app.post("/manage", async (req, res) => {
         // Omitted validation check
         //  Can get this from the page rather than using another DB call.
         //  Add it as a hidden form value.
@@ -70,7 +70,7 @@ dblib.getTotalRecords()
                     type: "post",
                     totRecs: totRecs.totRecords,
                     result: result,
-                    prod: req.body
+                    cus: req.body
                 })
             })
             .catch(err => {
@@ -78,16 +78,16 @@ dblib.getTotalRecords()
                     type: "post",
                     totRecs: totRecs.totRecords,
                     result: `Unexpected Error: ${err.message}`,
-                    prod: req.body
+                    cus: req.body
                 });
             });
     });
 
-    app.get("/manage", async (req, res) => {
+app.get("/manage", async (req, res) => {
         // Omitted validation check
         const totRecs = await dblib.getTotalRecords();
         //Create an empty customer object (To populate form with values)
-        const prod = {
+        const cus = {
             cusID: "",
             cusFname: "",
             cusLname: "",
@@ -99,7 +99,7 @@ dblib.getTotalRecords()
         res.render("manage", {
             type: "get",
             totRecs: totRecs.totRecords,
-            prod: prod
+            cus: cus
         });
     });
 
