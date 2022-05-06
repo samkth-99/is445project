@@ -9,32 +9,32 @@
     <table>
         <tr>
             <td><label for="cusId">ID</label>:</td>
-            <td><input type="number" name="cusId" id="cusId" value="<%= cus.cusId%>"/></td>
+            <td><input type="number" name="cusId" id="cusId" value="<%= cus.cusId %>" /></td>
             <td>(equal)</td>
         </tr>
         <tr>
             <td><label for="cusFname">First Name</label>:</td>
-            <td><input type="text" name="cusFname" id="cusFname" value="<%= cus.cusFname%>"/></td>
+            <td><input type="text" name="cusFname" id="cusFname" value="<%= cus.cusFname %>" /></td>
             <td>(begins with)</td>
         </tr>
         <tr>
             <td><label for="cusLname">Last Name</label>:</td>
-            <td><input type="text" name="cusLname" id="cusLname" value="<%= cus.cusLname%>"/></td>
+            <td><input type="text" name="cusLname" id="cusLname"value="<%= cus.cusLname %>" /></td>
             <td>(begins with)</td>
         </tr>
         <tr>
             <td><label for="cusState">State</label>:</td>
-            <td><input type="text" name="cusState" id="cusState" value="<%= cus.cusState%>" /></td>
+            <td><input type="text" name="cusState" id="cusState" value="<%= cus.cusState %>" /></td>
             <td>(equal)</td>
         </tr>
         <tr>
             <td><label for="cusSalesYTD">Sales YTD</label>:</td>
-            <td><input type="text" name="cusSalesYTD" id="cusSalesYTD" value="<%= cus.cusSalesYTD%>"/></td>
+            <td><input type="text" name="cusSalesYTD" id="cusSalesYTD" value="<%= cus.cusSalesYTD %>" /></td>
             <td>(greater or equal to)</td>
         </tr>
         <tr>
             <td><label for="cusSalesPrev">Previous Years Sales</label>:</td>
-            <td><input type="text" name="cusSalesPrev" id="cusSalesPrev"  value="<%= cus.cusSalesYTD%>"/></td>
+            <td><input type="text" name="cusSalesPrev" id="cusSalesPrev" value="<%= cus.cusSalesPrev %>" /></td>
             <td>(greater or equal to)</td>
         </tr>
         <tr>
@@ -65,12 +65,12 @@
             <tbody>
                 <% result.result.forEach(customer => { %> 
                     <tr>
-                        <td><%= customer.cusId %></td>
-                        <td><%= customer.cusFname %></td>
-                        <td><%= customer.cusLname %></td>
-                        <td><%= customer.cusState %></td>
-                        <td><%= customer.cusSalesYTD %></td>
-                        <td><%= customer.cusSalesPrev %></td>
+                        <td><%= customer.cusid %></td> 
+                        <td><%= customer.cusfname %></td>
+                        <td><%= customer.cuslname %></td>
+                        <td><%= customer.cusstate %></td>
+                        <td><%= customer.cussalesytd %></td>
+                        <td><%= customer.cussalesprev %></td>
                     </tr>
                 <% }); %>
             </tbody>

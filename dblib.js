@@ -104,6 +104,7 @@ const findCustomers = (customer) => {
 
     return pool.query(sql, params)
         .then(result => {
+            console.log("IN FIND CUSTOMER, result is: ", result.rows);
             return { 
                 trans: "success",
                 result: result.rows

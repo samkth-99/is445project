@@ -37,15 +37,35 @@ app.get("/", (req, res) => {
     res.render("index");
 });
 
-app.get("/manage", async (req, res) => {
-        // Omitted validation check
-        const totRecs = await dblib.getTotalRecords();
-        res.render("manage", {
-            type: "get",
-            totRecs: totRecs.totRecords
-        });
-    });
+// app.get("/manage", async (req, res) => {
+//         // Omitted validation check
+//         const totRecs = await dblib.getTotalRecords();
+//         res.render("manage", {
+//             type: "get",
+//             totRecs: totRecs.totRecords
+//         });
+//     });
     
+app.get("/manage", async (req, res) => {
+    // Omitted validation check
+    const totRecs = await dblib.getTotalRecords();
+    //Create an empty customer object (To populate form with values)
+    const cus = {
+        cusID: "",
+        cusFname: "",
+        cusLname: "",
+        cusState: "",
+        cusSalesYTD: "", 
+        cusSalesPrev: ""
+    };
+    console.log("cus is: ", cus);
+    res.render("manage", {
+        type: "get",
+        totRecs: totRecs.totRecords,
+        cus: cus
+    });
+});
+
 app.post("/manage", async (req, res) => {
         // Omitted validation check
         //  Can get this from the page rather than using another DB call.
@@ -54,6 +74,7 @@ app.post("/manage", async (req, res) => {
     
         dblib.findCustomers(req.body)
             .then(result => {
+                console.log(result)
                 res.render("manage", {
                     type: "post",
                     totRecs: totRecs.totRecords,
@@ -71,24 +92,6 @@ app.post("/manage", async (req, res) => {
             });
     });
 
-app.get("/manage", async (req, res) => {
-        // Omitted validation check
-        const totRecs = await dblib.getTotalRecords();
-        //Create an empty customer object (To populate form with values)
-        const cus = {
-            cusID: "",
-            cusFname: "",
-            cusLname: "",
-            cusState: "",
-            cusSalesYTD: "", 
-            cusSalesPrev: ""
 
-        };
-        res.render("manage", {
-            type: "get",
-            totRecs: totRecs.totRecords,
-            cus: cus
-        });
-    });
 
     
