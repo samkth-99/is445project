@@ -1,0 +1,11 @@
+<%- include("_header") -%>
+
+<h3>Click on Download to export all database records to export.txt</h3>
+<form action="/export" method="post">
+    <input type="submit" id="submit" value="Download" class="btn btn-primary">
+</form>
+<% if(message.substring(0,5) === "Error") { %>
+    <h2>Error!</h2>
+    <p><%= message %></p>
+<% } %>
+<%- include("_footer") -%>

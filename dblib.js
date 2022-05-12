@@ -35,8 +35,7 @@ const insertCustomer = (customer) => {
         params = Object.values(customer);
     };
 
-    const sql = `INSERT INTO customer (cusId, cusFname, cusLname, cusState, cusSalesYTD, cusSalesPrev)
-                 VALUES ($1, $2, $3, $4, $5, $6)`;
+    const sql = "INSERT INTO customer (cusId, cusFname, cusLname, cusState, cusSalesYTD, cusSalesPrev) VALUES ($1, $2, $3, $4, $5, $6)";
 
     return pool.query(sql, params)
         .then(res => {
@@ -120,3 +119,4 @@ const findCustomers = (customer) => {
 
 // Add towards the bottom of the page
 module.exports.findCustomers = findCustomers;
+

@@ -1,0 +1,83 @@
+<%- include("_header") -%>
+
+<h1>Create New Customer</h1>
+
+<% if (message === "get") { %>
+    <p>Please enter your information below and submit the form</p>
+<% } else { %>
+    <p>Below is the data you entered</p>
+<% } %>
+
+<form action="/create" method="POST">
+    <p>
+        <label for="cusId">ID:</label>
+        <input type="number" name="cusId" id="cusId" value="<%= data.cusId %>" required/>
+            <td>(required)</td>
+        <br>
+        <label for="cusFname">First Name:</label>
+        <input type="text" name="cusFname" id="cusFname" value="<%= data.cusFname %>" required />
+            <td>(required)</td>
+        <br>
+        <label for="cusLname">Last Name:</label>
+        <input type="text" name="cusLname" id="cusLname" value="<%= data.cusLname %>" required />
+            <td>(required)</td>
+        <br>
+        <label for="cusState">State:</label>
+        <input type="text" name="cusState" id="cusState" value="<%= data.cusState %>" required />
+        <br>
+        <label for="cusSalesYTD">Sales YTD:</label>
+        <input type="text" name="cusSalesYTD" id="cusSalesYTD" value="<%= data.cusSalesYTD %>"/>
+        <br>
+        <label for="cusSalesPrev">Sales Previous Years:</label>
+        <input type="text" name="cusSalesPrev" id="cusSalesPrev" value="<%= data.cusSalesPrev %>" />
+    </p>
+
+    <div class="form-group">        
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-primary">Create</button>
+          <button type="reset" class="btn btn-primary">Reset</button>
+        </div>
+    </div>
+</form>
+<p id="result"></p>
+
+<script>
+    // Typically, if the script is large, we place it in a separate file
+    //   For demonstrations, it is included in the same file.
+    // Handle form submission
+    document.querySelector("form").addEventListener("submit", e => {
+      // Cancel default behavior of sending a synchronous POST request
+      e.preventDefault();
+      // Create a FormData object, passing the form as a parameter
+      const formData = new FormData(e.target);
+      // Send form data to the server with an asynchronous POST request
+      fetch("/create", {
+        method: "POST",
+        body: formData
+      })
+        .then(response => response.text())
+        .then(data => {
+            const resultElement = document.getElementById("result");
+            if (data.substring(0,5) === "Error") {
+                resultElement.innerText = `Error occurred!  ${data}`
+            } else {
+                resultElement.innerText = data;
+            };
+        })
+        .catch(err => {
+            document.getElementById("message").textContent = `Error: ${err.message}`;
+        });
+    });
+</script>
+
+<% if (message === "post") { %>
+    <script>document.getElementById("<%= data.cusId %>").checked = true;</script>
+    <script>document.getElementById("<%= data.cusFname %>").checked = true;</script>
+    <script>document.getElementById("<%= data.cusLname %>").checked = true;</script>
+    <script>document.getElementById("<%= data.cusState %>").checked = true;</script>
+    <script>document.getElementById("<%= data.cusSalesYTD %>").checked = true;</script>
+    <script>document.getElementById("<%= data.cusSalesPrev %>").checked = true;</script>
+<% } %> 
+
+
+<%- include("_footer") -%>
