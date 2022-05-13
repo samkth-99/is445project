@@ -245,8 +245,8 @@ app.get("/edit/:id", (req, res) => {
   });
 
   // POST /edit/
-app.post("/edit/:id", (req, res) => {
-    const id = req.params.id;
+app.post("/edit/:id",  async (req, res) => {
+    const id = await req.params.id;
     const customer = [req.body.cusId, req.body.cusFname, req.body.cusLname, req.body.cusState, cusSalesYTD, cusSalesPrev, id];
     const sql = "UPDATE customer SET ID = $1, First Name = $2, Last Name = $3, State = $4, Sales YTD = $5, Sales Preivous Years = $6 WHERE (ID = $1)";
     pool.query(sql, customer, (err, result) => {
