@@ -23,7 +23,7 @@
             <td>(required)</td>
         <br>
         <label for="cusState">State:</label>
-        <input type="text" name="cusState" id="cusState" value="<%= data.cusState %>" required />
+        <input type="text" name="cusState" id="cusState" value="<%= data.cusState %>" />
         <br>
         <label for="cusSalesYTD">Sales YTD:</label>
         <input type="text" name="cusSalesYTD" id="cusSalesYTD" value="<%= data.cusSalesYTD %>"/>
@@ -61,7 +61,7 @@
             if (data.substring(0,5) === "Error") {
                 resultElement.innerText = `Error occurred!  ${data}`
             } else {
-                resultElement.innerText = data;
+                resultElement.innerText = `New Customer Created! ${data}`;
             };
         })
         .catch(err => {

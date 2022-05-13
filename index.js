@@ -8,7 +8,10 @@ const multer = require("multer");
 const upload = multer();
 
 // Add middleware to parse default urlencoded form
-app.use(express.urlencoded({ extended: false }));
+// Server configuration
+
+app.use(express.urlencoded({ extended: false })); // <--- middleware configuration
+
 
 // Setup EJS
 app.set("view engine", "ejs");
@@ -219,13 +222,39 @@ const result = dblib.insertCustomer(data)
         if (result.trans === "fail") {
             console.log("ERROR OCCURED");
             console.log(result.msg);
+            res.send(result.msg)
         } else {
             console.log("Insert Successful");
             console.log(result.msg);
+            res.send(result.msg)
         }
         
     })
     
+    
+
+//edit customer 
+
+app.get("/edit/:id", (req, res) => {
+    const id = req.params.id;
+    const sql = "SELECT * FROM customer WHERE cusId = $1";
+    pool.query(sql, [id], (err, result) => {
+      // if (err) ...
+      res.render("edit", { model: result.rows[0] });
+    });
+  });
+
+  // POST /edit/
+app.post("/edit/:id", (req, res) => {
+    const id = req.params.id;
+    const customer = [req.body.cusId, req.body.cusFname, req.body.cusLname, req.body.cusState, cusSalesYTD, cusSalesPrev, id];
+    const sql = "UPDATE customer SET ID = $1, First Name = $2, Last Name = $3, State = $4, Sales YTD = $5, Sales Preivous Years = $6 WHERE (ID = $1)";
+    pool.query(sql, customer, (err, result) => {
+      // if (err) ...
+      res.redirect("/manage");
+    });
+  });
+
 
 //delete
 app.get("/delete/:id", (req, res) => {
@@ -244,6 +273,5 @@ app.get("/delete/:id", (req, res) => {
 });
 
 });
-
 
 })

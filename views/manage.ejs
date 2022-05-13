@@ -29,13 +29,13 @@
         </tr>
         <tr>
             <td><label for="cusSalesYTD">Sales YTD</label>:</td>
-            <td><input type="text" name="cusSalesYTD" id="cusSalesYTD" value="<%= cus.cusSalesYTD %>" /></td>
+            <td><input type="text" name="cusSalesYTD" id="cusSalesYTD" value="<%= cus.cusSalesYTD %>" maxlength="2"/></td>
             <td>(greater or equal to)</td>
         </tr>
         <tr>
             <td><label for="cusSalesPrev">Previous Years Sales</label>:</td>
             <td><input type="text" name="cusSalesPrev" id="cusSalesPrev" value="<%= cus.cusSalesPrev %>" /></td>
-            <td>(greater or equal to)</td>
+            <td>(greater or equal to) </td>
         </tr>
         <tr>
             <td span="2">
@@ -43,11 +43,13 @@
                 <input type="reset" value="Reset" class="btn btn-primary"/>
             </td>
         </tr>
-        
+
     </table>
 </form>
-<br>
-<!-- Omitted Error Checking / Needs to be added -->
+<br> 
+
+
+<!-- Omitted Error Checking -->
 <% if (type === "post") { %>
     <% if (result.result.length === 0) { %>
         <h3>No records found!</h3>
@@ -61,8 +63,7 @@
                     <th>Last Name</th>
                     <th>State</th>
                     <th>Sales YTD</th>
-                    
-                                     
+                              
                 </tr>
             </thead>
             <tbody>
