@@ -1,20 +1,44 @@
-<%- include("_header") -%>
-
-<h1>Update a record</h1>
-
-<form action="/edit/<%= model.cusId %>" method="post">
-  <div class="form-horizontal">
-
-    <%- include("_editor") -%>
-
-    <div class="form-group row">
-      <label class="col-form-label col-sm-2"></label>
-      <div class="col-sm-10">
-        <input type="submit" value="Update" class="btn btn-default btn-warning" />
-        <a class="btn btn-outline-dark cancel" href="/manage">Cancel</a>
-      </div>
+<form action="/edit/<%= model.cusid %>" method="post">
+    <div class="col-md-4 mb-3">
+        <label class="form-label" for="cusid">ID</label>
+        <input readonly class="form-control" type="number" id="cusid" name="cusid" value="<%=model.cusid%>" required>
     </div>
-  </div>
+    <div class="col-md-4 mb-3">
+        <label class="form-label" for="cusfname">First Name</label>
+        <input class="form-control" type="text" id="cusfname" name="cusfname" value="<%=model.cusfname%>" required>
+        <div class="valid-feedback">
+            Looks good!
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <label class="form-label" for="cuslname">Last Name</label>
+        <input class="form-control" type="text" id="cuslname" name="cuslname" value="<%=model.cuslname%>" required>
+        <div class="valid-feedback">
+            Looks good!
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <label class="form-label" for="cusstate">State</label>
+        <input class="form-control" type="text" id="cusstate" name="cusstate" value="<%=model.cusstate%>" required>
+        <div class="valid-feedback">
+            Looks good!
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <label class="form-label" for="cussalesytd">SalesYTD</label>
+        <input class="form-control" type="text" id="cussalesytd" name="cussalesytd" value="<%=model.cussalesytd%>" required>
+        <div class="valid-feedback">
+            Looks good!
+        </div>
+        </div>
+    <div class="col-md-4 mb-3">
+        <label class="form-label" for="cussalesprev">SalesPrev</label>
+        <input class="form-control" type="text" id="cussalesprev" name="cussalesprev" value="<%=model.cussalesprev%>" required>
+        <div class="valid-feedback">
+            Looks good!
+        </div>
+    </div>
+    <div class="col-md-4 mb-2">
+        <button class="btn btn-info">Update Customer</button>
+    </div>
 </form>
-
-<%- include("_footer") -%>
